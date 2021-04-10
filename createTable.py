@@ -13,11 +13,14 @@ except ImportError:
 #fill in the desired number of pages to be scraped
 #when empty, it will scrape all the pages
 #TODO: take argument from command-line
-requestedData = fillContainer()
+requestedData = fillContainer(3)
 
 row=1
+#creation of new xlsx file
 workbook = xlsxwriter.Workbook('result.xlsx')
 worksheet = workbook.add_worksheet()
+
+#preparation of xlx file
 worksheet.set_column('A:Z', 45)
 worksheet.write(0, 1, 'Name')
 worksheet.write(0, 2, 'Ground')
@@ -34,9 +37,11 @@ for item in requestedData:
     imageUrl = getattr(item, 'imageUrl')
     postLink = getattr(item, 'link')
     
+    #getting image data from image url
     image_data = BytesIO(urlopen(imageUrl).read())
 
     worksheet.set_row(row, 95)
+    #inserts
     worksheet.insert_image(row, 0, postLink, {'image_data': image_data, 'url': postLink})
     worksheet.write(row, 1,  getattr(item, 'name'))
     worksheet.write(row, 2,  getattr(item, 'ground'))

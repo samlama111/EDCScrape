@@ -38,6 +38,7 @@ def confirmInitialPopUpWindow():
     #TODO: wait till element is visible 
     longWait()
 
+    #TODO: Randomize which button is clicked in the initial pop-up
     driver.find_element_by_class_name('coi-banner__accept').click()
 
     shortWait()
@@ -71,42 +72,36 @@ def scrapeSinglePage():
         longWait()
         if(numberOfAttributes == 1):
             newListing = Listing(name=name, link=link, price=price, imageUrl=imageUrl, ground=info[0].text)
-            print(vars(newListing))
+            #print(vars(newListing))
             container.append(newListing)
         else:
             if(numberOfAttributes == 2):
                 newListing = Listing(name=name, link=link, price=price, imageUrl=imageUrl, m2=info[0].text, rooms=info[1].text)
-                print(vars(newListing))
                 container.append(newListing)
             elif(numberOfAttributes == 7):
                 newListing = Listing(name=name, link=link, price=price, imageUrl=imageUrl, m2=info[0].text, 
                 ground=info[1].text,rooms=info[2].text, yearOfConstruction=info[3].text,
                 lengthOfStay=info[4].text, plusMinus=info[5].text, rentAndConsumption=info[6].text)
-                print(vars(newListing))
                 container.append(newListing)
             elif(numberOfAttributes == 8):
                 newListing = Listing(name=name, link=link, price=price, imageUrl=imageUrl, m2=info[0].text, 
                 ground=info[1].text,rooms=info[2].text, yearOfConstruction=info[3].text,
                 lengthOfStay=info[4].text, plusMinus=info[5].text, pricePerM2=info[6].text,
                 ownershipCostPerMonth=info[7].text)
-                print(vars(newListing))
                 container.append(newListing)
             else:
                 print("error")
         #uncomment to easily see how pagination works
-        break
+        #break
         shortWait()
     #TODO: check if the button really exists
     nextPageElement = driver.find_element_by_xpath('//ul[contains(@class,\'pagination\')]//li//a[contains(text(),\'Næste\')]').click()
     shortWait()
-#TODO: Randomize which button is clicked in the initial pop-up
 def scrapeAmountOfPages(numberOfPages):
     currentPage = getNumberOfCurrentPage()
     while(int(currentPage)<=int(numberOfPages)):
-        #scrape single page
         scrapeSinglePage()
         currentPage = getNumberOfCurrentPage()
-        print(currentPage)
         shortWait()
 def fillContainer(numberOfPagesToBeScraped='not specified'):
     driver.get(url)
