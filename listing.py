@@ -1,8 +1,9 @@
 class Listing:
     
-    def __init__(self, name="-", price="-", imageUrl="-", ground="-", m2="-", rooms="-", yearOfConstruction="-",lengthOfStay="-",
-     plusMinus="-", RentAndConsumption="-", pricePerM2="-", ownershipCostPerMonth="-"):
+    def __init__(self, name="-",link="-", price="-", imageUrl="-", ground="-", m2="-", rooms="-", yearOfConstruction="-",lengthOfStay="-",
+     plusMinus="-", rentAndConsumption="-", pricePerM2="-", ownershipCostPerMonth="-"):
         self.name = name
+        self.link = link
         self.price = price
         self.imageUrl = imageUrl
         self.ground = ground
@@ -11,8 +12,8 @@ class Listing:
         self.yearOfConstruction = yearOfConstruction
         self.lengthOfStay = lengthOfStay
         self.plusMinus = plusMinus
-        self.RentAndConsumption = "-"
-        self.pricePerM2 = "-"
-        self.ownershipCostPerMonth = "-"
+        self.rentAndConsumption = rentAndConsumption
+        self.pricePerM2 = pricePerM2
+        self.ownershipCostPerMonth = ownershipCostPerMonth
         
         
